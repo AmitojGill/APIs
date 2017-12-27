@@ -7,8 +7,8 @@ import codecs
 sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
-foursquare_client_id = "PASTE_YOUR_ID_HERE"
-foursquare_client_secret = "YOUR_SECRET_HERE"
+foursquare_client_id = "P0R4TNSJ34MYDW5DITIXQ5SB5YAWTFJKEIKHI3EHZNS10MKB"
+foursquare_client_secret = "OUZOBXI133ETHMNVCHVTYXME4AKHPZMHTU4IQNHM3K4LC0WX"
 
 
 def findARestaurant(mealType,location):
@@ -20,9 +20,10 @@ def findARestaurant(mealType,location):
 	print latitude
 	print longitude
 
-	
 	#2.  Use foursquare API to find a nearby restaurant with the latitude, longitude, and mealType strings.
 	#HINT: format for url will be something like https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20130815&ll=40.7,-74&query=sushi
+	url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20130815&ll=%i,%i&query=%s' %(foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
+
 
 	#3. Grab the first restaurant
 	#4. Get a  300x300 picture of the restaurant using the venue_id (you can change this by altering the 300x300 value in the URL or replacing it with 'orginal' to get the original picture

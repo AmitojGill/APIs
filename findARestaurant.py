@@ -14,7 +14,9 @@ foursquare_client_secret = "YOUR_SECRET_HERE"
 def findARestaurant(mealType,location):
 	#1. Use getGeocodeLocation to get the latitude and longitude coordinates of the location string.
 	latitude, longitude = getGeocodeLocation(location)
-	print locaiton + " >>> "
+	print "="*len(location)
+	print location
+	print "="*len(location)
 	print latitude
 	print longitude
 

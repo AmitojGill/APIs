@@ -22,8 +22,12 @@ def findARestaurant(mealType,location):
 
 	#2.  Use foursquare API to find a nearby restaurant with the latitude, longitude, and mealType strings.
 	#HINT: format for url will be something like https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20130815&ll=40.7,-74&query=sushi
-	url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20130815&ll=%i,%i&query=%s' %(foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
+	url = ('https://api.foursquare.com/v2/venues/search?client_id=%s&client_secret=%s&v=20130815&ll=%s,%s&query=%s&limit=1' %(foursquare_client_id, foursquare_client_secret,latitude,longitude,mealType))
 
+	h = httplib2.Http()
+	response, content = h.request(url,'GET')
+	result = json.loads(content)
+	print result
 
 	#3. Grab the first restaurant
 	#4. Get a  300x300 picture of the restaurant using the venue_id (you can change this by altering the 300x300 value in the URL or replacing it with 'orginal' to get the original picture

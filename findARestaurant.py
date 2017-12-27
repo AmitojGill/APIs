@@ -27,12 +27,19 @@ def findARestaurant(mealType,location):
 	h = httplib2.Http()
 	response, content = h.request(url,'GET')
 	result = json.loads(content)
-	print "=" * 100
-	print result
-	print "=" * 100
-	#3. Grab the first restaurant
-	first_restaurant = result["response"]["venues"][0]["name"]
-	print first_restaurant
+	
+	if result["response"]["venues"]:
+		#3. Grab the first restaurant
+		restaurant = result["response"]["venues"][0]
+		venue_id = restaurant["id"]
+		restaurant_name = restaurant["name"]
+		restaurant_address = restaurant['location']["formattedAddress"]
+		address = ""
+		for i in restaurant_address:
+			address += i + " "
+		restaurant_address = address
+
+
 	#4. Get a  300x300 picture of the restaurant using the venue_id (you can change this by altering the 300x300 value in the URL or replacing it with 'orginal' to get the original picture
 	img_url = result["response"]["venues"][0]["categories"][0]["icon"]["prefix"]
 	file_type = result["response"]["venues"][0]["categories"][0]["icon"]["suffix"]
@@ -40,6 +47,8 @@ def findARestaurant(mealType,location):
 	img_url += file_type
 	print img_url
 	#5. Grab the first image
+
+
 	#6. If no image is available, insert default a image url
 	#7. Return a dictionary containing the restaurant name, address, and image url	
 if __name__ == '__main__':

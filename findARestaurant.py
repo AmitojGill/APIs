@@ -61,6 +61,7 @@ def findARestaurant(mealType,location):
 
 	#6. If no image is available, insert default a image url
 	#7. Return a dictionary containing the restaurant name, address, and image url	
+		print {'name': restaurant_name, 'address': restaurant_address, 'image url': img_url}
 if __name__ == '__main__':
 	findARestaurant("Pizza", "Tokyo, Japan")
 	findARestaurant("Tacos", "Jakarta, Indonesia")

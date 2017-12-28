@@ -40,15 +40,21 @@ def findARestaurant(mealType,location):
 		restaurant_address = address
 
 	#4. Get a  300x300 picture of the restaurant using the venue_id (you can change this by altering the 300x300 value in the URL or replacing it with 'orginal' to get the original picture
-		img_url = ('https://api.foursquare.com/v2/venues/%s/photos?&oauth_token=4CBWAS2SQH2ZKJWQPDFQ3EHONPIB3UXRU1NP3BLYNQOQQDB3&v=20171227' %(venue_id))
+		url = ('https://api.foursquare.com/v2/venues/%s/photos?&oauth_token=4CBWAS2SQH2ZKJWQPDFQ3EHONPIB3UXRU1NP3BLYNQOQQDB3&v=20171227' %(venue_id))
 		h = httplib2.Http()
-		response, content = h.request(img_url, 'GET')
+		response, content = h.request(url, 'GET')
 		result = json.loads(content)
-		#print result['response']['photos']
-		item_1 = result['response']['photos']['items'][0]
 
-		for i in item_1:
-			print i
+		count = result['response']['photos']['count']
+
+		if count >= 1:
+			prefix = result['response']['photos']['items'][0]['prefix']
+			suffix = result['response']['photos']['items'][0]['suffix']
+			img_size = "300x300"
+			img_url = prefix + img_size + suffix
+		else:
+			img_url = "https://www.shareicon.net/download/2016/10/05/839345_fork_512x512.png"
+		print img_url
 		
 	#5. Grab the first image
 

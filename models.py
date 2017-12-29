@@ -13,6 +13,14 @@ class Puppy(Base):
     description = Column(String(250))
     #Add add a decorator property to serialize data from the database
 
+    @property
+    def serialize(self):
+    	return{
+    		'name' : self.name,
+    		'id' : self.id,
+    		'description' : self.description,
+    	}
+
 
 
 engine = create_engine('sqlite:///puppies.db')

@@ -7,6 +7,7 @@ app = Flask(__name__)
 def puppiesFunction():
   if request.method == 'GET':
   	#Call the method to Get all of the puppies
+    getAllPuppies()
   	
   
   elif request.method == 'POST':

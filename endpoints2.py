@@ -47,3 +47,7 @@ def updatePuppy(id):
 
 def deletePuppy(id):
   return "Removing Puppy with id %s" % id
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='localhost', port=5000)  

@@ -29,6 +29,7 @@ def puppiesFunctionId(id):
   	
   elif request.method == 'DELETE':
   	#Call the method to remove a puppy
+    deletePuppy(id)
   	
 
 

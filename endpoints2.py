@@ -25,6 +25,7 @@ def puppiesFunctionId(id):
   	
   if request.method == 'PUT':
   	#Call the method to update a puppy
+    updatePuppy(id)
   	
   elif request.method == 'DELETE':
   	#Call the method to remove a puppy

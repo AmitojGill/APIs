@@ -12,7 +12,8 @@ def puppiesFunction():
   
   elif request.method == 'POST':
   	#Call the method to make a new puppy
-  
+    makeANewPuppy()
+
   
  
 #Make another app.route() decorator here that takes in an integer id in the 

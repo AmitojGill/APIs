@@ -3,7 +3,7 @@ app = Flask(__name__)
 # Create the appropriate app.route functions, test and see if they work, and paste your URIs in the boxes below.
 
 #Make an app.route() decorator here
-@app.route('/puppies')
+@app.route('/puppies', methods=['GET','POST'])
 def puppiesFunction():
   if request.method == 'GET':
   	#Call the method to Get all of the puppies
@@ -17,7 +17,7 @@ def puppiesFunction():
   
  
 #Make another app.route() decorator here that takes in an integer id in the 
-@app.route('/puppies/<int:id>')
+@app.route('/puppies/<int:id>' methods=['GET','PUT','DELETE'])
 def puppiesFunctionId(id):
   if request.method == 'GET':
   	#Call the method to get a specific puppy based on their id

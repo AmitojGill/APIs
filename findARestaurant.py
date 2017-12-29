@@ -40,7 +40,7 @@ def findARestaurant(mealType,location):
 		restaurant_address = address
 
 	#4. Get a  300x300 picture of the restaurant using the venue_id (you can change this by altering the 300x300 value in the URL or replacing it with 'orginal' to get the original picture
-		url = ('https://api.foursquare.com/v2/venues/%s/photos?&oauth_token=4CBWAS2SQH2ZKJWQPDFQ3EHONPIB3UXRU1NP3BLYNQOQQDB3&v=20171227' %(venue_id))
+		url = ('https://api.foursquare.com/v2/venues/%s/photos?client_id=%s&v=20150603&client_secret=%s' %(venue_id, foursquare_client_id, foursquare_client_secret))
 		h = httplib2.Http()
 		response, content = h.request(url, 'GET')
 		result = json.loads(content)

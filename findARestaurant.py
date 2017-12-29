@@ -46,22 +46,26 @@ def findARestaurant(mealType,location):
 		result = json.loads(content)
 
 		count = result['response']['photos']['count']
-
-		if count >= 1:
-			prefix = result['response']['photos']['items'][0]['prefix']
-			suffix = result['response']['photos']['items'][0]['suffix']
+	#5. Grab the first image
+		if result['response']['photos']['items']:
+			firstPic = result['response']['photos']['items'][0]
+			prefix = firstPic['prefix']
+			suffix = firstPic['suffix']
 			img_size = "300x300"
 			img_url = prefix + img_size + suffix
 		else:
-			img_url = "https://www.shareicon.net/download/2016/10/05/839345_fork_512x512.png"
-		print img_url
-		
-	#5. Grab the first image
-
-
 	#6. If no image is available, insert default a image url
-	#7. Return a dictionary containing the restaurant name, address, and image url	
-		print {'name': restaurant_name, 'address': restaurant_address, 'image url': img_url}
+			img_url = "https://cdn.pixabay.com/photo/2017/12/28/12/32/set-3045129_1280.jpg"
+	#7. Return a dictionary containing the restaurant name, address, and image url
+		restaurantInfo = {'name': restaurant_name, 'address': restaurant_address, 'image': img_url}
+		print "Restaurant Name: %s" % restaurantInfo['name']
+		print "Restaurant Address: %s" % restaurantInfo['address']
+		print "Image: %s \n" % restaurantInfo['image']
+		return restaurantInfo
+	else:
+		print "No restaurant found for %s" % location
+		return "No Restaurants Found"
+
 if __name__ == '__main__':
 	findARestaurant("Pizza", "Tokyo, Japan")
 	findARestaurant("Tacos", "Jakarta, Indonesia")

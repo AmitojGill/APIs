@@ -7,12 +7,12 @@ app = Flask(__name__)
 def puppiesFunction():
   if request.method == 'GET':
   	#Call the method to Get all of the puppies
-    getAllPuppies()
+    return getAllPuppies()
   	
   
   elif request.method == 'POST':
   	#Call the method to make a new puppy
-    makeANewPuppy()
+    return makeANewPuppy()
 
   
  
@@ -21,15 +21,15 @@ def puppiesFunction():
 def puppiesFunctionId(id):
   if request.method == 'GET':
   	#Call the method to get a specific puppy based on their id
-    getPuppy(id)
+    return getPuppy(id)
   	
   if request.method == 'PUT':
   	#Call the method to update a puppy
-    updatePuppy(id)
+    return updatePuppy(id)
   	
   elif request.method == 'DELETE':
   	#Call the method to remove a puppy
-    deletePuppy(id)
+    return deletePuppy(id)
   	
 
 

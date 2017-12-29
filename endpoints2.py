@@ -21,6 +21,7 @@ def puppiesFunction():
 def puppiesFunctionId(id):
   if request.method == 'GET':
   	#Call the method to get a specific puppy based on their id
+    getPuppy(id)
   	
   if request.method == 'PUT':
   	#Call the method to update a puppy

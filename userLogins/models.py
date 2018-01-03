@@ -12,6 +12,9 @@ class User(Base):
 	username=Column(String(32), index=True)
 	password_hash = Column(String(64))
 
+	def hash_password(self, password):
+		self.password_hash = pwd_context.encrypt(password)
+
 class Bagel(Base):
 	__tablename__ = 'bagel'
 	id = Column(Integer, primary_key=True)
@@ -19,6 +22,7 @@ class Bagel(Base):
 	picture = Column(String)
 	description = Column(String)
 	price = Column(String)
+
 	@property
 	def serialize(self):
 	    """Return object data in easily serializeable format"""

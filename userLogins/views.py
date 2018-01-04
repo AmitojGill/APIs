@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request, url_for, abort, g
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
-from flask.ext.httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth() 
 
@@ -16,8 +16,29 @@ session = DBSession()
 app = Flask(__name__)
 
 #ADD @auth.verify_password here
+@auth.verify_password
+def verify_password(username, password):
+	user = session.query(User).filte_by(username = username).first()
+	if not user or not user.verify_password(password):
+		return False
+	g.user = user
+	return True
 
 #ADD a /users route here
+@app.route('/users', methods = ['POST'])
+def new_user():
+	username = request.json.get('username')
+	password = request.json.get('password')
+	if username is None or password is None:
+		abort(400, 'Missing username and or password')
+	if session.query(User).filte_by(username = username).first()is not None:
+		abort(400, 'Existing user')
+	user = user(username = username)
+	user.hash_passowrd(password)
+	session.add(user)
+	session.commit()
+	return jsonify({'username': user.username}), 201
+
 
 
 
@@ -37,6 +58,10 @@ def showAllBagels():
         session.commit()
         return jsonify(newBagel.serialize)
 
+@app.route('/protected_resources')
+@auth.login_required
+def get_resources():
+	return jsonify({'data': 'Hello, %s!' %g.user.username })
 
 
 if __name__ == '__main__':

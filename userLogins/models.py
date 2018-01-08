@@ -18,23 +18,6 @@ class User(Base):
 	def verify_password(self, password):
 		return pwd_context.verify(password,self.password_hash)
 
-class Bagel(Base):
-	__tablename__ = 'bagel'
-	id = Column(Integer, primary_key=True)
-	name = Column(String)
-	picture = Column(String)
-	description = Column(String)
-	price = Column(String)
-
-	@property
-	def serialize(self):
-	    """Return object data in easily serializeable format"""
-	    return {
-	    'name' : self.name,
-	    'picture' : self.picture,
-	    'description' : self.description,
-	    'price' : self.price
-	        }
 
 
 engine = create_engine('sqlite:///bagelShop.db')

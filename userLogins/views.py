@@ -42,6 +42,7 @@ def get_user(id):
 	return jsonify({'username':user.username})
 
 @app.route('/protected_resource')
+@auth.login_required
 def get_resource():
 	return jsonify({'data': 'Hello, %s!' % g.user.username})
 

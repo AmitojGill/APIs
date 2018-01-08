@@ -20,7 +20,7 @@ class User(Base):
 
 
 
-engine = create_engine('sqlite:///bagelShop.db')
+engine = create_engine('sqlite:///users.db')
  
 
 Base.metadata.create_all(engine)

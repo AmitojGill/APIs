@@ -41,6 +41,10 @@ def get_user(id):
 		abort(400)
 	return jsonify({'username':user.username})
 
+@app.route('/protected_resource')
+def get_resource():
+	return jsonify({'data': 'Hello, %s!' % g.user.username})
+
 
 if __name__ == '__main__':
     app.debug = True

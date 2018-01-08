@@ -34,10 +34,7 @@ def new_user():
 	return jsonify({'username': user.username}), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
 
 
-@app.route('/protected_resources')
-@auth.login_required
-def get_resources():
-	return jsonify({'data': 'Hello, %s!' %g.user.username })
+
 
 
 if __name__ == '__main__':

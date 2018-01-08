@@ -25,10 +25,10 @@ def new_user():
 	password = request.json.get('password')
 	if username is None or password is None:
 		abort(400, 'Missing username and or password')
-	if session.query(User).filte_by(username = username).first()is not None:
+	if session.query(User).filter_by(username = username).first()is not None:
 		abort(400, 'Existing user')
-	user = user(username = username)
-	user.hash_passowrd(password)
+	user = User(username = username)
+	user.hash_password(password)
 	session.add(user)
 	session.commit()
 	return jsonify({'username': user.username}), 201, {'Location': url_for('get_user', id = user.id, _external = True)}

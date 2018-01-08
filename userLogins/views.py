@@ -8,7 +8,7 @@ from flask_httpauth import HTTPBasicAuth
 auth = HTTPBasicAuth() 
 
 
-engine = create_engine('sqlite:///bagelShop.db')
+engine = create_engine('sqlite:///users.db')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)

@@ -34,24 +34,6 @@ def new_user():
 	return jsonify({'username': user.username}), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
 
 
-
-
-@app.route('/bagels', methods = ['GET','POST'])
-#protect this route with a required login
-def showAllBagels():
-    if request.method == 'GET':
-        bagels = session.query(Bagel).all()
-        return jsonify(bagels = [bagel.serialize for bagel in bagels])
-    elif request.method == 'POST':
-        name = request.json.get('name')
-        description = request.json.get('description')
-        picture = request.json.get('picture')
-        price = request.json.get('price')
-        newBagel = Bagel(name = name, description = description, picture = picture, price = price)
-        session.add(newBagel)
-        session.commit()
-        return jsonify(newBagel.serialize)
-
 @app.route('/protected_resources')
 @auth.login_required
 def get_resources():

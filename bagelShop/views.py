@@ -31,14 +31,19 @@ def new_user():
 	username = request.json.get('username')
 	password = request.json.get('password')
 	if username is None or password is None:
-		abort(400, 'Missing username and password')
+		print 'Missing username and password'
+		abort(400)
+
 	if session.query(User).filter_by(username = username).first() is not None:
-		abort(400, 'Existing User')
+		print "existing user"
+		user = session.query(User).filter_by(username=username).first()
+		return jsonify({'message':'user already exisits'}), 200
+
 	user = User(username = username)
 	user.hash_password(password)
 	session.add(user)
 	session.commit()
-	return jsonify({'username':user.username}), 201, {'Location':url_for('get_user', id = user.id, _external=True)}
+	return jsonify({'username':user.username}), 201#, {'Location':url_for('get_user', id = user.id, _external=True)}
 
 
 @app.route('/bagels', methods = ['GET','POST'])

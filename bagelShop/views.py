@@ -26,8 +26,20 @@ def verify_password(username, password):
 
 
 #ADD a /users route here
-
-
+@app.route('/users', methods = ['POST'])
+def new_user():
+	username = request.json.get('username')
+	password = request.json.get('password')
+	if username is None or password is None:
+		abort(400, 'Missing username and password')
+	if session.query(User).filter_by(username = username).first() is not None:
+		abort(400, 'Existing User')
+	user = User(username = username)
+	user.hash_password(password)
+	session.add(user)
+	session.commit()
+	return jsonify({'username':user.username}), 201, {'Location':url_for('get_user', id = user.id, _external=True)}
+	
 
 @app.route('/bagels', methods = ['GET','POST'])
 #protect this route with a required login

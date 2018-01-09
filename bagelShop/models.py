@@ -7,6 +7,14 @@ Base = declarative_base()
 
 #ADD YOUR USER MODEL HERE
 
+class User(Base):
+	__tablename__ = 'user'
+
+	id = Column(Integer, primary_key=True)
+	username = Column(String(32), index = True)
+	password_hash = Column(String(64))
+	
+
 class Bagel(Base):
 	__tablename__ = 'bagel'
 	id = Column(Integer, primary_key=True)

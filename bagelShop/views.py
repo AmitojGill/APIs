@@ -39,10 +39,11 @@ def new_user():
 	session.add(user)
 	session.commit()
 	return jsonify({'username':user.username}), 201, {'Location':url_for('get_user', id = user.id, _external=True)}
-	
+
 
 @app.route('/bagels', methods = ['GET','POST'])
 #protect this route with a required login
+@auth.login_required
 def showAllBagels():
     if request.method == 'GET':
         bagels = session.query(Bagel).all()

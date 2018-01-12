@@ -1,4 +1,3 @@
- (70 sloc)  3.11 KB
 from models import Base, User, Product
 from flask import Flask, jsonify, request, url_for, abort, g
 from sqlalchemy.ext.declarative import declarative_base

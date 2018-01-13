@@ -22,7 +22,11 @@ app = Flask(__name__)
 
 
 #add /token route here to get a token for a user with login credentials
-
+@app.route('/token')
+@auth.login_required
+def get_auth_token():
+	token = g.user.get_auth_token()
+	return jsonify({'token':token.decode('ascii')})
 
 
 

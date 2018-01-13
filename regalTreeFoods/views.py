@@ -21,7 +21,7 @@ app = Flask(__name__)
 #ADD @auth.verify_password decorator here
 @auth.verify_password
 def verify_password(username_or_token, password):
-	user_id = user.verify_auth_token(username_or_token)
+	user_id = User.verify_auth_token(username_or_token)
 	if user_id:
 		user = session.query(User).filter_by(id=user_id).one()
 	else:

@@ -12,7 +12,9 @@ session = DBsession()
 
 app = Flask(__name__)
 
-
+@app.route('/clientOAuth')
+def start():
+	return render_template('clientOAuth.html')
 
 if __name__ == '__main__':
 	app.debug = True

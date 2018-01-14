@@ -42,6 +42,6 @@ class User(Base):
 		user_id = data['id']
 		return user_id
 
-engine = create_engine('sqlite:///usersWithOAuth.db')
+engine = create_engine('sqlite:///paleKale.db')
 
 Base.metadata.create_all(engine)

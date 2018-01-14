@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 from models import Base, User
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
-engine = create_engine('sqlite:///usersWithOauth.db')
+engine = create_engine('sqlite:///paleKale.db')
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
 
@@ -15,6 +15,8 @@ app = Flask(__name__)
 @app.route('/clientOAuth')
 def start():
 	return render_template('clientOAuth.html')
+
+
 
 if __name__ == '__main__':
 	app.debug = True

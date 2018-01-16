@@ -16,6 +16,17 @@ app = Flask(__name__)
 def start():
 	return render_template('clientOAuth.html')
 
+@auth.verify_password
+def verify_password(username_or_token, password):
+	user_id = User.verify_auth_token(username_or_token)
+	if user_id:
+		user = session.query(User).filter_by(id = user_id).one()
+	else:
+		user = session.query(User).filter_by(username = username_or_token).first()
+		if not user or not user.verify_password(password):
+			return False
+	g.user = user
+	return True
 
 
 if __name__ == '__main__':

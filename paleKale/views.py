@@ -41,6 +41,11 @@ def get_user(id):
 		abort(400)
 	return jsonify({'username':user.username})
 
+@app.route('/api/resource')
+@auth.login_required
+def get_resource():
+	return jsonify({'data': 'Hello, %s!' % g.user.username })
+
 @app.route('/users', methods =['POST'])
 def new_user():
 	username = request.json.get('username')

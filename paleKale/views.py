@@ -34,6 +34,30 @@ def get_auth_token():
 	token = g.user.generate_auth_token()
 	return jsonify({'token': token.decode('ascii')})
 
+@app.route('/users', methods =['POST'])
+def new_user():
+	username = request.json.get('username')
+	password = request.json.get('password')
+	#Check to see if username of password are blank
+	if username is None or password is None:
+		print "missing arguments"
+		abort(400)
+
+	#check to see if user already exist in the db
+	if session.query(User).filter_by(username = username).first() is not None:
+		print "existing user"
+		user = session.query(User).filter_by(username=username).first()
+		return jsonify({'message':'user already exists'}), 200
+
+	#Create a New user
+	user = User(username = username)
+	user.hash_password(password)
+	session.add(user)
+	session.commit()
+	return jsonfiy({'username': user.username}), 201
+
+
+
 if __name__ == '__main__':
 	app.debug = True
 	app.run(host='0.0.0.0',port=5000)

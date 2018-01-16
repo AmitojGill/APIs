@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, g, jsonify
 from models import Base, User
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -28,6 +28,11 @@ def verify_password(username_or_token, password):
 	g.user = user
 	return True
 
+@app.route('/token')
+@auth.login_required
+def get_auth_token():
+	token = g.user.generate_auth_token()
+	return jsonify({'token': token.decode('ascii')})
 
 if __name__ == '__main__':
 	app.debug = True

@@ -3,7 +3,16 @@ from models import Base, User
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
+import json
+from flask.ext.httpauth import HTTPBasicAuth
 
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
+import httplib2
+from flask import make_response
+import requests
+
+auth = HTTPBasicAuth()
 engine = create_engine('sqlite:///paleKale.db')
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
